@@ -1,0 +1,185 @@
+{
+  "id": "openmemory",
+  "kind": "memory",
+  "uiHints": {
+    "baseUrl": {
+      "label": "OpenMemory URL",
+      "placeholder": "http://localhost:8070",
+      "help": "URL of your OpenMemory server"
+    },
+    "apiKey": {
+      "label": "API Key",
+      "sensitive": true,
+      "placeholder": "your-api-key",
+      "help": "OpenMemory API key for authentication"
+    },
+    "userId": {
+      "label": "User ID",
+      "placeholder": "nyx",
+      "help": "User ID for memory isolation"
+    },
+    "maxResults": {
+      "label": "Max Results",
+      "placeholder": "5",
+      "help": "Maximum memories to inject per turn"
+    },
+    "minScore": {
+      "label": "Min Score",
+      "placeholder": "0.3",
+      "help": "Minimum relevance score (0-1)"
+    },
+    "autoRecall": {
+      "label": "Auto-Recall",
+      "help": "Automatically inject relevant memories into context"
+    },
+    "autoCapture": {
+      "label": "Auto-Capture",
+      "help": "Automatically store important information from conversations"
+    },
+    "temporal.enabled": {
+      "label": "Temporal Facts",
+      "help": "Enable temporal facts with validity periods (e.g., 'Alice worked at Acme from 2020-2023')"
+    },
+    "graph.enabled": {
+      "label": "Graph Traversal",
+      "help": "Enable knowledge graph traversal to find related concepts"
+    },
+    "graph.traversalHops": {
+      "label": "Traversal Hops",
+      "placeholder": "1",
+      "help": "Number of hops to traverse in the knowledge graph"
+    },
+    "graph.extractEntities": {
+      "label": "Extract Entities",
+      "help": "Automatically extract and link entities from captured memories"
+    },
+    "sectors.enabled": {
+      "label": "Cognitive Sectors",
+      "help": "Store memories in cognitive sectors (episodic, semantic, procedural, emotional, reflective)"
+    },
+    "sectors.defaultSector": {
+      "label": "Default Sector",
+      "placeholder": "semantic",
+      "help": "Default sector for memories that don't match a pattern"
+    },
+    "recall.includeTraces": {
+      "label": "Include Traces",
+      "help": "Show explanations for why memories were recalled"
+    },
+    "recall.temporalContext": {
+      "label": "Temporal Context",
+      "help": "Include current temporal facts about extracted entities in recall"
+    },
+    "compression.autoCompress": {
+      "label": "Auto-Compress",
+      "help": "Automatically compress redundant memories when threshold is reached"
+    },
+    "compression.threshold": {
+      "label": "Compression Threshold",
+      "placeholder": "100",
+      "help": "Number of compressible memories before auto-compression triggers"
+    }
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "enabled": {
+        "type": "boolean",
+        "default": true
+      },
+      "baseUrl": {
+        "type": "string",
+        "default": "http://localhost:8070"
+      },
+      "apiKey": {
+        "type": "string"
+      },
+      "userId": {
+        "type": "string",
+        "default": "default"
+      },
+      "maxResults": {
+        "type": "number",
+        "default": 5
+      },
+      "minScore": {
+        "type": "number",
+        "default": 0.3
+      },
+      "autoRecall": {
+        "type": "boolean",
+        "default": true
+      },
+      "autoCapture": {
+        "type": "boolean",
+        "default": false
+      },
+      "temporal": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "graph": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "default": false
+          },
+          "traversalHops": {
+            "type": "number",
+            "default": 1
+          },
+          "extractEntities": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "sectors": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "default": false
+          },
+          "defaultSector": {
+            "type": "string"
+          }
+        }
+      },
+      "recall": {
+        "type": "object",
+        "properties": {
+          "includeTraces": {
+            "type": "boolean",
+            "default": false
+          },
+          "temporalContext": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "compression": {
+        "type": "object",
+        "properties": {
+          "autoCompress": {
+            "type": "boolean",
+            "default": false
+          },
+          "threshold": {
+            "type": "number",
+            "default": 100
+          }
+        }
+      }
+    },
+    "required": ["baseUrl", "apiKey"]
+  }
+}
