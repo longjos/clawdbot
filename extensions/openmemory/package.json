@@ -1,0 +1,13 @@
+{
+  "name": "@moltbot/plugin-openmemory",
+  "version": "0.1.0",
+  "description": "OpenMemory integration for Moltbot - automatic memory recall and capture",
+  "main": "index.ts",
+  "type": "module",
+  "keywords": ["moltbot", "plugin", "memory", "openmemory"],
+  "author": "Nyx 🦊",
+  "license": "MIT",
+  "peerDependencies": {
+    "clawdbot": ">=0.63.0"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "id": "openmemory",
+  "kind": "memory",
+  "uiHints": {
+    "baseUrl": {
+      "label": "OpenMemory URL",
+      "placeholder": "http://localhost:8070",
+      "help": "URL of your OpenMemory server"
+    },
+    "apiKey": {
+      "label": "API Key",
+      "sensitive": true,
+      "placeholder": "your-api-key",
+      "help": "OpenMemory API key for authentication"
+    },
+    "userId": {
+      "label": "User ID",
+      "placeholder": "nyx",
+      "help": "User ID for memory isolation"
+    },
+    "maxResults": {
+      "label": "Max Results",
+      "placeholder": "5",
+      "help": "Maximum memories to inject per turn"
+    },
+    "minScore": {
+      "label": "Min Score",
+      "placeholder": "0.3",
+      "help": "Minimum relevance score (0-1)"
+    },
+    "autoRecall": {
+      "label": "Auto-Recall",
+      "help": "Automatically inject relevant memories into context"
+    },
+    "autoCapture": {
+      "label": "Auto-Capture",
+      "help": "Automatically store important information from conversations"
+    }
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "enabled": {
+        "type": "boolean",
+        "default": true
+      },
+      "baseUrl": {
+        "type": "string",
+        "default": "http://localhost:8070"
+      },
+      "apiKey": {
+        "type": "string"
+      },
+      "userId": {
+        "type": "string",
+        "default": "default"
+      },
+      "maxResults": {
+        "type": "number",
+        "default": 5
+      },
+      "minScore": {
+        "type": "number",
+        "default": 0.3
+      },
+      "autoRecall": {
+        "type": "boolean",
+        "default": true
+      },
+      "autoCapture": {
+        "type": "boolean",
+        "default": false
+      }
+    },
+    "required": ["baseUrl", "apiKey"]
+  }
+}
