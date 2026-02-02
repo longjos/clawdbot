@@ -1,0 +1,51 @@
+{
+  "id": "nats-wake",
+  "kind": "service",
+  "name": "NATS Wake",
+  "description": "Wake agents via NATS message bus with priority support",
+  "entry": "./index.ts",
+  "uiHints": {
+    "enabled": { "label": "Enabled", "help": "Enable NATS wake plugin" },
+    "url": { "label": "NATS URL", "placeholder": "nats://localhost:4222" },
+    "subjects": { "label": "Subjects", "help": "Patterns like agent.*.inbox (wildcards supported)" },
+    "credentials.token": { "label": "Token", "sensitive": true },
+    "credentials.user": { "label": "Username" },
+    "credentials.pass": { "label": "Password", "sensitive": true },
+    "reconnect.maxAttempts": { "label": "Max Reconnect Attempts", "advanced": true },
+    "reconnect.delayMs": { "label": "Reconnect Delay (ms)", "advanced": true },
+    "reconnect.maxDelayMs": { "label": "Max Reconnect Delay (ms)", "advanced": true },
+    "defaultAgent": { "label": "Default Agent", "placeholder": "main", "advanced": true },
+    "agentName": { "label": "Agent Name", "placeholder": "nyx", "help": "Used as 'from' in outgoing messages" }
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "enabled": { "type": "boolean", "description": "Enable NATS wake plugin" },
+      "url": { "type": "string", "description": "NATS server URL (nats://host:port)" },
+      "subjects": {
+        "type": "array",
+        "items": { "type": "string" },
+        "description": "NATS subjects to subscribe (supports wildcards)"
+      },
+      "credentials": {
+        "type": "object",
+        "properties": {
+          "token": { "type": "string", "description": "NATS authentication token" },
+          "user": { "type": "string", "description": "NATS username" },
+          "pass": { "type": "string", "description": "NATS password" }
+        }
+      },
+      "reconnect": {
+        "type": "object",
+        "properties": {
+          "maxAttempts": { "type": "number", "description": "Max reconnect attempts (-1 = infinite)" },
+          "delayMs": { "type": "number", "description": "Initial reconnect delay (ms)" },
+          "maxDelayMs": { "type": "number", "description": "Max reconnect delay (ms)" }
+        }
+      },
+      "defaultAgent": { "type": "string", "description": "Default agent for messages without 'to' field" },
+      "agentName": { "type": "string", "description": "This agent's name for outgoing message 'from' field" }
+    }
+  }
+}

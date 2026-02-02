@@ -952,6 +952,7 @@
                   "tools/clawhub",
                   "plugin",
                   "plugins/voice-call",
+                  "plugins/nats-wake",
                   "plugins/zalouser"
                 ]
               },
