@@ -208,6 +208,20 @@ export async function describeStickerImage(params: DescribeStickerParams): Promi
     resolved = activeModel;
   }
 
+  // If the active model isn't vision-capable, try another vision model from the same provider
+  // (e.g. opencode-zen may offer gemini-3-flash even when the primary model lacks vision).
+  if (!resolved && (await hasProviderKey(defaultModel.provider))) {
+    const visionEntries = catalog.filter(
+      (entry) =>
+        entry.provider.toLowerCase() === defaultModel.provider.toLowerCase() &&
+        modelSupportsVision(entry),
+    );
+    if (visionEntries.length > 0) {
+      const preferred = visionEntries.find((e) => /flash|mini/i.test(e.id)) ?? visionEntries[0];
+      resolved = { provider: defaultModel.provider, model: preferred.id };
+    }
+  }
+
   if (!resolved) {
     for (const provider of VISION_PROVIDERS) {
       if (!(await hasProviderKey(provider))) {
