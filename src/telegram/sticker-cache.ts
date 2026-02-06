@@ -203,11 +203,8 @@ export async function describeStickerImage(params: DescribeStickerParams): Promi
   };
 
   let resolved = null as { provider: string; model?: string } | null;
-  if (
-    activeModel &&
-    VISION_PROVIDERS.includes(activeModel.provider as (typeof VISION_PROVIDERS)[number]) &&
-    (await hasProviderKey(activeModel.provider))
-  ) {
+  // Prefer the agent's own model when the catalog confirms it supports vision.
+  if (activeModel && (await hasProviderKey(activeModel.provider))) {
     resolved = activeModel;
   }
 
